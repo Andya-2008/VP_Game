@@ -21,6 +21,11 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int pointsAdded)
     {
         score += pointsAdded;
+        if (score % 5 == 0)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().UpdateWave();
+            GameObject.Find("Andrew").GetComponent<Andrew_Health>().GainHealth(1);
+        }
         text.text = "Score: " + score.ToString();
     }
 }

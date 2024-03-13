@@ -5,7 +5,7 @@ using UnityEngine;
 public class HamburgerSpawner : MonoBehaviour
 {
     [SerializeField] GameObject Collectible;
-    [SerializeField] float spawnInterval = 5f;
+    [SerializeField] public float spawnInterval = 5f;
     float startTime;
     // Start is called before the first frame update
     void Start()

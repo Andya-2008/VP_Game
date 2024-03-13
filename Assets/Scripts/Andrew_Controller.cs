@@ -9,6 +9,9 @@ public class Andrew_Controller : MonoBehaviour
     [SerializeField] float AndrewSpeed = 1f;
     [SerializeField] float JumpForce = 10f;
     bool isGrounded = true;
+    public bool movingLeft = false;
+    public bool movingRight = false;
+    public bool jumped = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,19 +21,13 @@ public class Andrew_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A) || movingLeft)
         {
-            RunningAndrew.SetActive(true);
-            StandingAndrew.SetActive(false);
-            this.transform.Translate(-transform.right * Time.deltaTime * 100 * AndrewSpeed);
-            this.transform.rotation = new Quaternion(0, 180, 0,0);
+            Run("left");
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || movingRight)
         {
-            RunningAndrew.SetActive(true);
-            StandingAndrew.SetActive(false);
-            this.transform.Translate(transform.right * Time.deltaTime * 100 * AndrewSpeed);
-            this.transform.rotation = new Quaternion(0, 0, 0, 0);
+            Run("right");
         }
         else
         {
@@ -38,7 +35,33 @@ public class Andrew_Controller : MonoBehaviour
             RunningAndrew.SetActive(false);
             StandingAndrew.SetActive(true); 
         }
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) || jumped)
+        {
+            Jump();
+        }
+    }
+
+    public void Run(string dir)
+    {
+        if(dir == "left" && this.transform.position.x >= -12.6f)
+        {
+            RunningAndrew.SetActive(true);
+            StandingAndrew.SetActive(false);
+            this.transform.Translate(-transform.right * Time.deltaTime * 100 * AndrewSpeed);
+            this.transform.rotation = new Quaternion(0, 180, 0, 0);
+        }
+        if(dir == "right" && this.transform.position.x <= 12.6f)
+        {
+            RunningAndrew.SetActive(true);
+            StandingAndrew.SetActive(false);
+            this.transform.Translate(transform.right * Time.deltaTime * 100 * AndrewSpeed);
+            this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+    }
+
+    public void Jump()
+    {
+        if (isGrounded)
         {
             isGrounded = false;
             this.GetComponent<Rigidbody2D>().AddForce(transform.up * JumpForce);
