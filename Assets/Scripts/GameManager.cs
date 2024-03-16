@@ -2,27 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public int Wave;
-    [SerializeField] TextMeshProUGUI waveText;
-    [SerializeField] GameObject MovingEnemy;
+    public TextMeshProUGUI waveText;
+    public GameObject MovingEnemy;
     [SerializeField] GameObject EnemyFab;
     [SerializeField] Transform EnemySpawnPoint;
-    List<GameObject> Enemies = new List<GameObject>(); 
+    public List<GameObject> Enemies = new List<GameObject>(); 
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(GameObject.Find("CloudSpawner"));
         Wave = 1;
-        waveText.text = "Wave: " + Wave.ToString();
-        Enemies.Add(MovingEnemy);
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            ToGameScene();
+        }
     }
 
     public void UpdateWave()
@@ -60,5 +66,11 @@ public class GameManager : MonoBehaviour
                 enemy.GetComponent<MovingAlien_DropBullet>().bulletDropInterval /= 1.2f;
             }
         }
+    }
+
+    public void ToGameScene()
+    {
+        Debug.Log("PlayAgain2");
+        SceneManager.LoadScene("GameScene");
     }
 }

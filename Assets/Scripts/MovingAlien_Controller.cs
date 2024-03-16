@@ -6,10 +6,15 @@ public class MovingAlien_Controller : MonoBehaviour
 {
     [SerializeField] public float moveSpeed = .1f;
     [SerializeField] bool right;
+    [SerializeField] bool initEnemy;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(initEnemy)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().MovingEnemy = this.gameObject;
+            GameObject.Find("GameManager").GetComponent<GameManager>().Enemies.Add(this.gameObject);
+        }
     }
 
     // Update is called once per frame

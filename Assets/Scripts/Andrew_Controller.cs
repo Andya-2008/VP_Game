@@ -31,7 +31,6 @@ public class Andrew_Controller : MonoBehaviour
         }
         else
         {
-            Debug.Log("1");
             RunningAndrew.SetActive(false);
             StandingAndrew.SetActive(true); 
         }
