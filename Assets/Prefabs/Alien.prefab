@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
   right: 0
+  initEnemy: 0
 --- !u!114 &9011906618718946541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5cf66573e2f5584983675bc5fd8bbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7272373613224375777, guid: 629db1fc0208e3343b7b6d743bdc0fc4, type: 3}
+  bullet: {fileID: 7660788719083864040, guid: 95c550297ae4636459400feaf80faf63, type: 3}
   bulletDropInterval: 5
   spawnPos: {fileID: 5167000191310475635}
 --- !u!1 &982821894754987529

@@ -11,14 +11,27 @@ public class GameManager : MonoBehaviour
     public GameObject MovingEnemy;
     [SerializeField] GameObject EnemyFab;
     [SerializeField] Transform EnemySpawnPoint;
-    public List<GameObject> Enemies = new List<GameObject>(); 
+    public List<GameObject> Enemies = new List<GameObject>();
+    [SerializeField] GameObject SkipButton;
+    [SerializeField] AudioSource musicPlayer;
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(GameObject.Find("AudioPlayer"));
         DontDestroyOnLoad(GameObject.Find("CloudSpawner"));
         Wave = 1;
         //SceneManager.LoadScene("GameScene");
+        if(PlayerPrefs.GetString("AlreadySeen") == "true")
+        {
+            SkipButton.SetActive(true);
+            
+        }
+        else
+        {
+            SkipButton.SetActive(false);
+            PlayerPrefs.SetString("AlreadySeen", "true");
+        }
         
     }
 
@@ -28,6 +41,10 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             ToGameScene();
+        }
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            PlayerPrefs.SetString("AlreadySeen", "false");
         }
     }
 
@@ -52,7 +69,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (GameObject enemy in Enemies)
             {
-                enemy.GetComponent<MovingAlien_Controller>().moveSpeed *= 1.2f;
+                enemy.GetComponent<MovingAlien_Controller>().moveSpeed *= 1.1f;
                 enemy.GetComponent<MovingAlien_DropBullet>().bulletDropInterval /= 2;
             }
         }
@@ -62,8 +79,8 @@ public class GameManager : MonoBehaviour
             Enemies.Add(newEnemy);
             foreach (GameObject enemy in Enemies)
             {
-                enemy.GetComponent<MovingAlien_Controller>().moveSpeed *= 1.05f;
-                enemy.GetComponent<MovingAlien_DropBullet>().bulletDropInterval /= 1.2f;
+                enemy.GetComponent<MovingAlien_Controller>().moveSpeed *= 1.03f;
+                enemy.GetComponent<MovingAlien_DropBullet>().bulletDropInterval /= 1.1f;
             }
         }
     }
@@ -72,5 +89,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("PlayAgain2");
         SceneManager.LoadScene("GameScene");
+        if (!musicPlayer.isPlaying)
+        {
+            musicPlayer.Play();
+        }
     }
 }
