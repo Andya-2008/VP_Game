@@ -19,8 +19,8 @@ public class HighScore
 
 public class HSController : MonoBehaviour
 {
-    [SerializeField] string API_KEY;
-    [SerializeField] int leaderBoardId;
+    [SerializeField] string API_KEY = "3234-0dsaf7-234q8-4134";
+    [SerializeField] int leaderBoardId=4;
     public static HSController instance;
     static HttpClient client = new HttpClient();
     private void Awake()
@@ -52,7 +52,7 @@ public class HSController : MonoBehaviour
     public IEnumerator AddScore(decimal score, string username)
     {
         Debug.Log("AddScore");
-        string domain = "http://highscores.frogcoo.com/";
+        string domain = "https://highscores.frogcoo.com/";
         string path = "api/HighScore/addscore";
         Debug.Log(username + " : " + score + " : " + leaderBoardId + " : " + API_KEY);
 
@@ -75,41 +75,7 @@ public class HSController : MonoBehaviour
                 Debug.Log("Success: High Score Added!");
             }
         }
-        /*
-
-
-        client.BaseAddress = new Uri("http://highscores.frogcoo.com/");
-        client.DefaultRequestHeaders.Accept.Clear();
-        client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-
-        string domain = "http://highscores.frogcoo.com/";
-        string path = "api/HighScore/addscore";
-        Debug.Log(username + " : " + score + " : " + leaderBoardId + " : " + API_KEY);
-        
-        try
-        {
-            string postBody = "";
-            
-            postBody += "{\"LeaderboardId\":" + leaderBoardId + ",";
-            postBody += "\"apiKey\":\"" + API_KEY + "\",";
-            postBody += "\"Name\":\"" + username + "\",";
-            postBody += "\"score\":" + score + "}";
-            Debug.Log(postBody);
-            HttpContent c = new StringContent(postBody, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync(domain + path, c);
-            if (response.IsSuccessStatusCode)
-            {
-                Debug.Log("Success: High Score Added");
-            }
-
-
-        }
-        catch (Exception ex) {
-            Debug.LogError(ex.Message);
-        }
-        */
+      
     }
 
     public void testHello()
@@ -119,9 +85,9 @@ public class HSController : MonoBehaviour
 
     public IEnumerator GetScore(Action<string> callback = null)
     {
-
-        string domain = "http://highscores.frogcoo.com/";
-        string path = "api/highscore/getscores?id=4&asc=0";
+        Debug.Log("GetScore");
+        string domain = "https://highscores.frogcoo.com/";
+        string path = "api/highscore/getscores?id=" + leaderBoardId  + "&asc=0";
         string uri = domain + path;
         string data = "";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -144,37 +110,15 @@ public class HSController : MonoBehaviour
                     break;
             }
 
+            Debug.Log(data);
+
             if (callback != null)
             {
                 callback(data);
             }
 
         }
-        /*
-         client.BaseAddress = new Uri("http://highscores.frogcoo.com/");
-         client.DefaultRequestHeaders.Accept.Clear();
-         client.DefaultRequestHeaders.Accept.Add(
-             new MediaTypeWithQualityHeaderValue("application/json"));
 
-         string domain = "http://highscores.frogcoo.com/";
-         string path = "api/HighScore/GetScores";
-
-         try
-         {
-             HttpResponseMessage response = await client.GetAsync(domain + path + "?LeaderBoardId=" + leaderBoardId);
-             string responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-             responseBody = responseBody.TrimStart('"').TrimEnd('"').Replace("\\", "");
-
-             Debug.Log(responseBody);
-
-             return responseBody;
-         }
-         catch (Exception ex) {
-             Debug.LogError(ex.Message);
-             return "";
-         }
-
-         */
     }
 
 }
