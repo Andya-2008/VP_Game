@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(GameObject.Find("CloudSpawner"));
         Wave = 1;
-        
+        //SceneManager.LoadScene("GameScene");
         
     }
 

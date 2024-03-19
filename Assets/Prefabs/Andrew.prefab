@@ -53,6 +53,9 @@ MonoBehaviour:
   StandingAndrew: {fileID: 2698721525385395185}
   AndrewSpeed: 0.07
   JumpForce: 1200
+  movingLeft: 0
+  movingRight: 0
+  jumped: 0
 --- !u!50 &8005995401459656082
 Rigidbody2D:
   serializedVersion: 4
@@ -79,7 +82,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &6555756237930842823
 BoxCollider2D:
   m_ObjectHideFlags: 0

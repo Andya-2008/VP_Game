@@ -26,4 +26,8 @@ public class PlayAgain : MonoBehaviour
         Debug.Log("PlayAgain1");
         SceneManager.LoadScene("GameScene");
     }
+    public void LeaderboardButton()
+    {
+        SceneManager.LoadScene("Leaderboard");
+    }
 }
