@@ -42,6 +42,7 @@ public class Andrew_Controller : MonoBehaviour
 
     public void Run(string dir)
     {
+        GameObject.Find("QuoteManager").GetComponent<QuoteManager>().FlipQuote(dir);
         if(dir == "left" && this.transform.position.x >= -12.6f)
         {
             RunningAndrew.SetActive(true);
@@ -62,6 +63,7 @@ public class Andrew_Controller : MonoBehaviour
     {
         if (isGrounded)
         {
+            GameObject.Find("Jump").GetComponent<AudioSource>().Play();
             isGrounded = false;
             this.GetComponent<Rigidbody2D>().AddForce(transform.up * JumpForce);
         }
@@ -75,6 +77,7 @@ public class Andrew_Controller : MonoBehaviour
         if (collision.gameObject.tag == "Coin")
         {
             Destroy(collision.gameObject);
+            GameObject.Find("Eat").GetComponent<AudioSource>().Play();
             GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(1);
         }
     }

@@ -37,7 +37,7 @@ public class HSController : MonoBehaviour
         }
         else if (instance != null)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

@@ -29,6 +29,7 @@ public class Andrew_Health : MonoBehaviour
 
     public void LoseHealth(int lostHealth)
     {
+        GameObject.Find("Hurt").GetComponent<AudioSource>().Play();
         health -= lostHealth;
         GameObject.Find("HealthManager").GetComponent<HealthManager>().UpdateHealth(health);
     }

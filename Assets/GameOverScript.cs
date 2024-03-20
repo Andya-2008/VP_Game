@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameOverScript : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class GameOverScript : MonoBehaviour
     }
     public void SaveHighScore() {
         hsController = this.gameObject.GetComponent<HSController>();
-        Debug.Log("test1");
         if (UserName.text.Length > 0 && UserName.text.Length < 15)
         {
             StartCoroutine(hsController.AddScore((decimal)sm.score, UserName.text));

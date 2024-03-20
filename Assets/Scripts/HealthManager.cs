@@ -28,7 +28,7 @@ public class HealthManager : MonoBehaviour
 
     public void UpdateHealth(int health)
     {
-        if(health == 0)
+        if (health == 0)
         {
             Debug.Log("Game Over");
             Heart1Cover.GetComponent<Image>().enabled = true;

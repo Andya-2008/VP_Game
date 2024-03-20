@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void UpdateWave()
     {
         Wave++;
+        GameObject.Find("QuoteManager").GetComponent<QuoteManager>().NextQuote();
         GameObject.Find("HamburgerSpawner").GetComponent<HamburgerSpawner>().spawnInterval *= 0.8f;
         waveText.text = "Wave: " + Wave.ToString();
         if(Wave == 1)

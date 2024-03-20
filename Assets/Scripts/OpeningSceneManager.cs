@@ -45,6 +45,7 @@ public class OpeningSceneManager : MonoBehaviour
         }
         if (startTimeUntilPresidentDead && (Time.time - timeUntilPresidentDead > 2.3f))
         {
+            GameObject.Find("Splat").GetComponent<AudioSource>().Play();
             President.gameObject.SetActive(false);
             startTimeUntilPresidentDead = false;
         }
