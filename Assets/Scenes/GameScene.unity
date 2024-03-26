@@ -2778,7 +2778,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106396911}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -4124,6 +4124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collectible: {fileID: 2258825038459365998, guid: b59f35fecc2a6964ab7d3f11e70b9036, type: 3}
   spawnInterval: 5
+  hamburgers: []
 --- !u!4 &1694755165
 Transform:
   m_ObjectHideFlags: 0
@@ -5211,7 +5212,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137806346}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}

@@ -6,6 +6,7 @@ public class HamburgerSpawner : MonoBehaviour
 {
     [SerializeField] GameObject Collectible;
     [SerializeField] public float spawnInterval = 5f;
+    [SerializeField] List<GameObject> hamburgers = new List<GameObject>();
     float startTime;
     // Start is called before the first frame update
     void Start()
@@ -20,8 +21,24 @@ public class HamburgerSpawner : MonoBehaviour
         {
             Vector2 randomPos;
             randomPos = new Vector2(Random.Range(-12f, 12f), Random.Range(-3.5f, 1f));
-            Instantiate(Collectible, randomPos, Quaternion.identity);
+            GameObject newHamburger = Instantiate(Collectible, randomPos, Quaternion.identity);
+            hamburgers.Add(newHamburger);
             startTime = Time.time;
+        }
+        if(hamburgers.Count >= 45)
+        {
+            foreach(GameObject hamburger in hamburgers)
+            {
+                Destroy(hamburger);
+            }
+            hamburgers.Clear();
+        }
+        foreach(GameObject hamburg in hamburgers)
+        {
+            if(hamburg == null)
+            {
+                hamburgers.Remove(hamburg);
+            }
         }
     }
 }
