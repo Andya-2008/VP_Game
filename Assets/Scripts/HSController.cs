@@ -20,7 +20,7 @@ public class HighScore
 public class HSController : MonoBehaviour
 {
     [SerializeField] string API_KEY = "3234-0dsaf7-234q8-4134";
-    [SerializeField] int leaderBoardId=4;
+    [SerializeField] int leaderBoardId = 4;
     public static HSController instance;
     static HttpClient client = new HttpClient();
     private void Awake()
@@ -75,7 +75,7 @@ public class HSController : MonoBehaviour
                 Debug.Log("Success: High Score Added!");
             }
         }
-      
+
     }
 
     public void testHello()
@@ -87,7 +87,7 @@ public class HSController : MonoBehaviour
     {
         Debug.Log("GetScore");
         string domain = "https://highscores.frogcoo.com/";
-        string path = "api/highscore/getscores?id=" + leaderBoardId  + "&asc=0";
+        string path = "api/highscore/getscores?id=" + leaderBoardId + "&asc=0";
         string uri = domain + path;
         string data = "";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -119,6 +119,45 @@ public class HSController : MonoBehaviour
 
         }
 
-    }
 
+
+
+
+    }
+    public IEnumerator GetStudents(string year, Action<string> callback = null)
+    {
+        Debug.Log("GetStudents");
+        string domain = "https://highscores.frogcoo.com/";
+        string path = "api/Raisbeck/getstudents?year=" + year;
+        string uri = domain + path;
+        string data = "";
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = uri.Split('/');
+            int page = pages.Length - 1;
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    break;
+                case UnityWebRequest.Result.Success:
+                    data = webRequest.downloadHandler.text;
+                    break;
+            }
+
+            Debug.Log(data);
+
+            if (callback != null)
+            {
+                callback(data);
+            }
+
+        }
+    }
 }
